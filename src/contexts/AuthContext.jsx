@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
 
   const fetchUser = async () => {
     try {
-      const response = await api.get('/auth/profile/');
+      const response = await api.get('/accounts/profile/');
       setUser(response.data);
     } catch (error) {
       localStorage.removeItem('access_token');
@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (username, password) => {
     try {
-      const response = await api.post('/auth/login/', { username, password });
+      const response = await api.post('/accounts/login/', { username, password });
       localStorage.setItem('access_token', response.data.access);
       localStorage.setItem('refresh_token', response.data.refresh);
       await fetchUser();
@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (userData) => {
     try {
-      await api.post('/auth/register/', userData);
+      await api.post('/accounts/register/', userData);
       toast.success('Registration successful! Please login.');
       return true;
     } catch (error) {

@@ -1,0 +1,82 @@
+import { useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import api from '../services/api';
+import { useAuth } from '../contexts/AuthContext';
+import LoadingSpinner from '../components/common/LoadingSpinner';
+import ErrorMessage from '../components/common/ErrorMessage';
+import ReviewCard from '../components/reviews/ReviewCard';
+
+export default function BookDetailPage() {
+  const { id } = useParams();
+  const { user } = useAuth();
+
+  const { data: book, isLoading, isError, error } = useQuery({
+    queryKey: ['book', id],
+    queryFn: async () => {
+      const { data } = await api.get(`/books/${id}/`);
+      return data;
+    }
+  });
+
+  if (isLoading) return <LoadingSpinner />;
+  if (isError) return <ErrorMessage message={error?.message || 'Failed to load book'} />;
+  if (!book) return <ErrorMessage message="Book not found" />;
+
+  return (
+    <div className="max-w-4xl mx-auto px-4 py-8">
+      <div className="bg-white rounded-lg shadow-lg p-8">
+        <div className="flex flex-col md:flex-row gap-8">
+          {/* Book Cover */}
+          <div className="md:w-1/3">
+            {book.cover_image ? (
+              <img src={book.cover_image} alt={book.title} className="w-full rounded-lg shadow" />
+            ) : (
+              <div className="w-full aspect-[2/3] bg-gray-200 rounded-lg flex items-center justify-center">
+                <span className="text-gray-400">No cover</span>
+              </div>
+            )}
+          </div>
+
+          {/* Book Details */}
+          <div className="md:w-2/3">
+            <h1 className="text-3xl font-bold mb-2">{book.title}</h1>
+            <p className="text-xl text-gray-600 mb-4">by {book.author}</p>
+            
+            <div className="flex items-center mb-4">
+              <span className="text-yellow-500 text-2xl mr-2">★</span>
+              <span className="text-2xl font-semibold">{book.average_rating?.toFixed(1)}</span>
+              <span className="text-gray-500 ml-2">({book.total_reviews} reviews)</span>
+            </div>
+
+            <div className="mb-4">
+              <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">
+                {book.genre}
+              </span>
+              <span className="ml-2 text-gray-600">{book.publication_year}</span>
+            </div>
+
+            <p className="text-gray-700 mb-6 leading-relaxed">{book.description}</p>
+
+            <div className="border-t pt-4">
+              <p className="text-gray-600"><span className="font-semibold">ISBN:</span> {book.isbn}</p>
+              <p className="text-gray-600"><span className="font-semibold">Publisher:</span> {book.publisher || 'Unknown'}</p>
+              <p className="text-gray-600"><span className="font-semibold">Pages:</span> {book.page_count || 'Unknown'}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+  <div className="mt-8">
+    <h2 className="text-2xl font-bold mb-4">Reviews</h2>
+    <div className="space-y-4">
+      {book.reviews?.map(review => (
+        <ReviewCard key={review.id} review={review} />
+      ))}
+      {(!book.reviews || book.reviews.length === 0) && (
+        <p className="text-gray-500 text-center py-4">No reviews yet. Be the first to review!</p>
+      )}
+    </div>
+   </div>
+    </div>
+  );
+}
