@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import FeedPage from './pages/feedPage';
 import { lazy, Suspense } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -7,6 +8,9 @@ import ProtectedRoute from './components/common/ProtectedRoute';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import LoadingSpinner from './components/common/LoadingSpinner';
+import RecommendationsPage from './pages/RecommendationsPage';
+import UsersPage from './pages/UsersPage';
+
 
 // Lazy load pages
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -40,7 +44,7 @@ function App() {
               <Suspense fallback={<LoadingSpinner />}>
                 <Routes>
                   <Route path="/" element={<HomePage />} />
-                 // <Route path="/login" element={<LoginPage />} />
+                  <Route path="/login" element={<LoginPage />} />
                   <Route path="/register" element={<RegisterPage />} />
                   <Route path="/books" element={<BooksPage />} />
                   <Route path="/books/:id" element={<BookDetailPage />} />
@@ -48,7 +52,12 @@ function App() {
                   <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
                   <Route path="/reading-list" element={<ProtectedRoute><ReadingListPage /></ProtectedRoute>} />
                   <Route path="*" element={<NotFoundPage />} />
-                </Routes>
+                  {/* <Route path="/feed" element={<FeedPage />} /> */}
+                  <Route path="/feed" element={<ProtectedRoute><FeedPage /></ProtectedRoute>} />
+                  {/* <Route path="/recommendations" element={<RecommendationsPage />} /> */}
+                  <Route path="/recommendations" element={<ProtectedRoute><RecommendationsPage /></ProtectedRoute>} />
+                  <Route path="/users" element={<ProtectedRoute><UsersPage /></ProtectedRoute>} />
+                </Routes> 
               </Suspense>
             </main>
             <Footer />

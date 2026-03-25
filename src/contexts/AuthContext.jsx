@@ -13,8 +13,8 @@ export const AuthProvider = ({ children }) => {
       const response = await api.get('/accounts/profile/');
       setUser(response.data);
     } catch (error) {
-      localStorage.removeItem('access_token');
-      localStorage.removeItem('refresh_token');
+       console.error('Failed to fetch user:', error);
+
     } finally {
       setLoading(false);
     }
@@ -61,7 +61,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout, isAuthenticated: !!user }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout,fetchUser, isAuthenticated: !!user }}>
       {children}
     </AuthContext.Provider>
   );
