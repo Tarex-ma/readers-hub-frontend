@@ -11,7 +11,7 @@ export default function BookCoverUpload({ bookId, currentCover, onSuccess }) {
     const file = e.target.files[0];
     if (!file) return;
 
-    // Preview
+    // Previewgit commit -m "Update README with screenshots"
     setPreview(URL.createObjectURL(file));
 
     // Upload

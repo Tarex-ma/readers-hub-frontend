@@ -13,25 +13,34 @@ A modern, responsive React frontend for the Reader's Hub book review platform. T
 
 | Service | URL |
 |---------|-----|
-| **Frontend Application** | [https://readers-hub-frontend.vercel.app](https://readers-hub-frontend.vercel.app) |
+| **Frontend Application** | [https://readers-hub-frontend-agwp-hs6wwbckc-tarikumato-7369s-projects.vercel.app](https://readers-hub-frontend-agwp-hs6wwbckc-tarikumato-7369s-projects.vercel.app) |
 | **Backend API** | [https://readers-hub-api.onrender.com](https://readers-hub-api.onrender.com) |
 | **API Documentation** | [https://readers-hub-api.onrender.com/swagger/](https://readers-hub-api.onrender.com/swagger/) |
 
 ## 📸 Screenshots
 
+### Main Pages
 | Homepage | Books Page |
 |----------|------------|
 | ![Homepage](screenshots/homepage.png) | ![Books Page](screenshots/books.png) |
 
-| Book Detail | Dashboard |
-|-------------|-----------|
-| ![Book Detail](screenshots/book-detail.png) | ![Dashboard](screenshots/dashboard.png) |
+| Book Detail | Write Review |
+|-------------|--------------|
+| ![Book Detail](screenshots/book-detail.png) | ![Write Review](screenshots/write-review.png) |
 
-| Reading List | Profile |
-|--------------|---------|
-| ![Reading List](screenshots/reading-list.png) | ![Profile](screenshots/profile.png) |
+### User Features
+| Dashboard | Reading List |
+|-----------|--------------|
+| ![Dashboard](screenshots/dashboard.png) | ![Reading List](screenshots/reading-list.png) |
 
-> 💡 *Add your actual screenshots to the `screenshots/` folder*
+| Profile | Activity Feed |
+|---------|---------------|
+| ![Profile](screenshots/profile.png) | ![Activity Feed](screenshots/activity-feed.png) |
+
+### Social Features
+| Discover Users | Reviews & Comments |
+|----------------|-------------------|
+| ![Discover Users](screenshots/discover-users.png) | ![Reviews](screenshots/reviews-section.png) |
 
 ## ✨ Features
 
